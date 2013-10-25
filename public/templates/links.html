@@ -1,0 +1,36 @@
+<ul> 
+  <li class="link" ng-repeat="link in links">
+    <img src="/redirect_icon.png"/>
+    <div class="info">
+      <div class="visits">
+        <span class="count">{{ link.visits }}</span>Visits
+      </div>
+      <div class="title">
+        {{ link.title }}
+        <!-- <a href="#" class="show-stats"> (show stats)</a> -->
+      </div>
+      <div class="original">{{ link.url }}</div>
+      <a href="{{ base_url }}/{{ code }}">{{ link.base_url }}/{{ link.code }}
+      </a>
+      <div class="last-visited">
+        <!-- FIXME: server needs to reflect link.updated_at using touch -->
+        <span class="visited">Last visited: {{ link.last_visited }}
+        </span>
+      </div>
+    </div>
+    <!-- <div class="stats hidden">
+      <table class="table-stats">
+        <tr class="table-time">
+          <td>
+            Time
+          </td>
+        </tr>
+        <tr class="table-clicks">
+          <td>
+            Clicks
+          </td>
+        </tr>
+      </table>
+    </div> -->
+  </li>
+</ul>

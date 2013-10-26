@@ -15,8 +15,18 @@ var app = angular.module('Shortly',[])
       })
   })
   //controllers: 
-  .controller('createCtrl',function($scope, $http){
-    //---
+  .controller('CreateCtrl',function($scope, $http){
+
+    $scope.post = function(){
+      $http.post('/links', {url: $scope.url})
+        .success(function(data, status, headers, config){
+          // TODO: append to link view
+          console.log('Post was successful');
+        })
+        .error(function(data, status){
+          console.log('Post did not succeed.');
+        });
+    }
   })
   .controller("LinksCtrl", function($scope, $http){
     $http.get('/links')
@@ -24,6 +34,6 @@ var app = angular.module('Shortly',[])
         $scope.links = data;
       })
       .error(function(data, status){
-        console.log('son of a bitch !!!');
+        console.log('Get did not succeed.');
       });
 });

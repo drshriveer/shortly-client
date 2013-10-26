@@ -5,6 +5,7 @@
 	  </form> 
 	  <img class="spinner" src="/spiffygif_46x46.gif"> 
 	<div class="message">
+    <!-- same HTML as in links.html ... refactor so DRY -->
     <ul> 
       <li class="link" ng-repeat="link in links">
         <img src="/redirect_icon.png"/>
@@ -14,7 +15,6 @@
           </div>
           <div class="title">
             {{ link.title }}
-            <!-- <a href="#" class="show-stats"> (show stats)</a> -->
           </div>
           <div class="original">{{ link.url }}</div>
           <a href="{{ base_url }}/{{ code }}">{{ link.base_url }}/{{ link.code }}

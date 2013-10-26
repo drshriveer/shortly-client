@@ -1,6 +1,10 @@
 <div ng-controller="LinksCtrl">
+  <div class="sortBar">
+      <a href="" ng-click="predicate='visits'" class="sort-visits">Num Visits</a>
+      <a href="" ng-click="predicate='last_visited'" class="sort-last-visit">Time Last Visited</a>
+  </div>
 <ul> 
-  <li class="link" ng-repeat="link in links">
+  <li class="link" ng-repeat="link in links | orderBy:predicate:reverse">
     <img src="/redirect_icon.png"/>
     <div class="info">
       <div class="visits">

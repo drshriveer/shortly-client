@@ -3,7 +3,6 @@ var app = angular.module('Shortly',[])
     $routeProvider
       .when('/',{
         controller: "LinksCtrl",
-        // template: "<h1> I'm a template! </h1>"
         templateUrl: "templates/links.html"
       })
       .when('/create',{
@@ -32,6 +31,10 @@ var app = angular.module('Shortly',[])
     }
   })
   .controller("LinksCtrl", function($scope, $http){
+    //here be sorting junk:
+    $scope.predicate = "visits";
+    $scope.reverse = true;
+
     $http.get('/links')
       .success(function(data, status, headers, config){
         $scope.links = data;

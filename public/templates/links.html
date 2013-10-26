@@ -16,8 +16,7 @@
         <!-- <a href="#" class="show-stats"> (show stats)</a> -->
       </div>
       <div class="original">{{ link.url }}</div>
-      <a href="{{ base_url }}/{{ code }}">{{ link.base_url }}/{{ link.code }}
-      </a>
+      <a href="{{ link.base_url}}/{{link.code }}">{{ link.base_url }}/{{ link.code }}</a>
       <div class="last-visited">
         <!-- FIXME: server needs to reflect link.updated_at using touch -->
         <span class="visited">Last visited: {{ link.last_visited }}

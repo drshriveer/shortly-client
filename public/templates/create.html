@@ -1,6 +1,6 @@
 <div ng-controller="CreateCtrl">
 	<form> 
-	    <input class="text" type="text" ng-model="url"> 
+	    <input class="text" type="url" ng-model="url"> 
 	    <input ng-click="post()" type="submit" value="Shorten"> 
 	  </form> 
 	  <img class="spinner" src="/spiffygif_46x46.gif"> 
@@ -8,24 +8,31 @@
     <!-- same HTML as in links.html ... refactor so DRY -->
     <ul> 
       <li class="link" ng-repeat="link in links">
-        <img src="/redirect_icon.png"/>
-        <div class="info">
-          <div class="visits">
-            <span class="count">{{ link.visits }}</span>Visits
-          </div>
-          <div class="title">
-            {{ link.title }}
-          </div>
-          <div class="original">{{ link.url }}</div>
-          <a href="{{ base_url }}/{{ code }}">{{ link.base_url }}/{{ link.code }}
-          </a>
-          <div class="last-visited">
-            <!-- FIXME: server needs to reflect link.updated_at using touch -->
-            <span class="visited">Last visited: {{ link.last_visited }}
-            </span>
-          </div>
-        </div>
+        <ng-include src="'link_layout'"></ng-include> 
       </li>
     </ul>
   </div>
 </div>
+
+
+
+
+
+<script type='text/ng-template' id="link_layout"> 
+  <img src="/redirect_icon.png"/>
+  <div class="info">
+    <div class="visits">
+      <span class="count">{{ link.visits }}</span>Visits
+    </div>
+    <div class="title">
+      {{ link.title }}
+    </div>
+    <div class="original">{{ link.url }}</div>
+    <a href="{{ link.base_url }}/{{ link.code }}">{{ link.base_url }}/{{ link.code }}</a>
+    <div class="last-visited">
+      <!-- FIXME: server needs to reflect link.updated_at using touch
+     <span class="visited">Last visited: {{ link.last_visited }}
+      </span>
+    </div>
+  </div>
+</script>

@@ -1,42 +1,35 @@
-<div ng-controller="LinksCtrl">
+<div ng-controller="LinksCtrl" ng-init="predicate='visits' ; reverse=true">
   <div class="sortBar">
-      <a href="" ng-click="predicate='visits'" class="sort-by">Num Visits</a>
-      <a href="" ng-click="predicate='last_visited'" class="sort-by">Time Last Visited</a>
+      <button ng-click="predicate='visits'; reverse=!reverse" class="sort-by">Num Visits</button>
+      <button ng-click="predicate='last_visited'; reverse=!reverse" class="sort-by">Time Last Visited</button>
       <input type="text" placeholder="Search for site" ng-model="searchBox" />
   </div>
 <ul> 
   <li class="link" ng-repeat="link in links | orderBy:predicate:reverse | filter:searchBox">
-    <img src="/redirect_icon.png"/>
-    <div class="info">
-      <div class="visits">
-        <span class="count">{{ link.visits }}</span>Visits
-      </div>
-      <div class="title">
-        {{ link.title }}
-        <!-- <a href="#" class="show-stats"> (show stats)</a> -->
-      </div>
-      <div class="original">{{ link.url }}</div>
-      <a href="{{ link.base_url}}/{{link.code }}">{{ link.base_url }}/{{ link.code }}</a>
-      <div class="last-visited">
-        <!-- FIXME: server needs to reflect link.updated_at using touch -->
-        <span class="visited">Last visited: {{ link.last_visited }}
-        </span>
-      </div>
-    </div>
-    <!-- <div class="stats hidden">
-      <table class="table-stats">
-        <tr class="table-time">
-          <td>
-            Time
-          </td>
-        </tr>
-        <tr class="table-clicks">
-          <td>
-            Clicks
-          </td>
-        </tr>
-      </table>
-    </div> -->
+    <ng-include src="'link_layout'"></ng-include> 
   </li>
 </ul>
 </div>
+
+
+
+
+
+<script type='text/ng-template' id="link_layout"> 
+  <img src="/redirect_icon.png"/>
+  <div class="info">
+    <div class="visits">
+      <span class="count">{{ link.visits }}</span>Visits
+    </div>
+    <div class="title">
+      {{ link.title }}
+    </div>
+    <div class="original">{{ link.url }}</div>
+    <a href="{{ link.base_url }}/{{ link.code }}">{{ link.base_url }}/{{ link.code }}</a>
+    <div class="last-visited">
+      <!-- FIXME: server needs to reflect link.updated_at using touch
+     <span class="visited">Last visited: {{ link.last_visited }}
+      </span>
+    </div>
+  </div>
+</script>

@@ -12,9 +12,41 @@ var app = angular.module('Shortly',[])
       .otherwise({
         redirectTo: '/'
       })
+  });
+
+
+// --------------------------------
+//  Getting and Creating Links
+// --------------------------------
+
+    //LINK SERVICE:
+app.factory('linkService', function($http, $q){
+    var service = {
+      getLinks: function(){
+        var deferred = $q.defer();
+        $http({
+          method: 'GET',
+          url: '/links'
+        }).success(function(data){
+          deferred.resolve(data);
+        }).error(function(error){
+          deferred.reject(error)
+        })
+        return deferred.promise;
+      }
+    };
+    return service; 
   })
-  //controllers: 
-  .controller('CreateCtrl',function($scope, $http){
+
+    //LINK CONTROLLERS:
+app.controller("LinksCtrl", function($scope, linkService , $http){
+    linkService.getLinks().then(function(data){
+      $scope.links = data;
+    });
+});
+
+    //LINK CONTROLLERS:
+app.controller('CreateCtrl',function($scope, $http){
 
     $scope.post = function(){
       // TODO: start spinner
@@ -29,17 +61,4 @@ var app = angular.module('Shortly',[])
           console.log('Post did not succeed.');
         });
     }
-  })
-  .controller("LinksCtrl", function($scope, $http){
-    //here be sorting junk:
-    $scope.predicate = "visits";
-    $scope.reverse = true;
-
-    $http.get('/links')
-      .success(function(data, status, headers, config){
-        $scope.links = data;
-      })
-      .error(function(data, status){
-        console.log('Get did not succeed.');
-      });
-});
+  });

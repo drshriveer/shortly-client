@@ -1,6 +1,7 @@
 <div ng-controller="CreateCtrl">
-	<form> 
-	    <input class="text" type="url" ng-model="url"> 
+
+	<form name="urlForm"> 
+	    <input class="text" type="url" name="urlBox" ng-model="url" required> 
 	    <input ng-click="post()" type="submit" value="Shorten"> 
 	  </form> 
 	  <img class="spinner" src="/spiffygif_46x46.gif"> 
